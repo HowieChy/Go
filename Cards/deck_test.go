@@ -17,8 +17,8 @@ func TestSvaeToDeckAndNewDeckTestFromFile(t *testing.T) {
 	deck.saveToFile("_decktesing")
 
 	loadedDeck := newDeckFromFile("_decktesing")
-	if len(loadedDeck) != 520 {
-		t.Errorf("预期长度是520，但现在长度是 %v", len(loadedDeck))
+	if len(loadedDeck) != 52 {
+		t.Errorf("预期长度是52，但现在长度是 %v", len(loadedDeck))
 	}
 	os.Remove("_decktesing")
 }
