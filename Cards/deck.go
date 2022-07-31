@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 //创建一个新的type deck
@@ -46,7 +47,7 @@ func (d deck) saveToFile(filename string) error {
 }
 
 //从文件中读取数据
-func newDeckFromFile(filename string) {
+func newDeckFromFile(filename string) deck {
 	bs, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -58,8 +59,12 @@ func newDeckFromFile(filename string) {
 
 //洗牌
 func (d deck) shuffle() {
+
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
 	for i := range d {
-		newPosition := rand.Intn(len(d) - 1)
+		newPosition := r.Intn(len(d) - 1)
 		d[i], d[newPosition] = d[newPosition], d[i]
 	}
 }
